@@ -1,0 +1,20 @@
+1. XCode 다운
+
+1. 들어가서 sdk 다운  -> https://docs.flutter.dev/get-started/install/macos
+
+1. zip을 터미널 cd $home 옮기고나서 압축풀기
+
+1. $export PATH="$PATH:$HOME/flutter/bin"
+
+1. $sudo gem install cocoapods
+
+1. Androidstudio 다운  다운완료하면 More Actions -> SDK Manager -> SDK Tools -> [Android SDK Build-Tools],[Android SDK Command-line Tools],[Android Emulator],[Android SDK Platform-tools]
+  그다음 플러그인에서 Flutter 다운해주면 완료
+
+1. $flutter doctor 로 대응다해주고 안될경우
+
+1. $cd /Applications/Android\ Studio.app/Contents
+1. $ln -s jbr jre
+
+
+
