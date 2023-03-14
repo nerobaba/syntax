@@ -1,0 +1,8 @@
+1. 설치
+$npx create-next-app 폴더이름
+
+1. 실행코드
+$npm run dev  - 개발환경실행
+$npm run build  - 배포 파일 생성
+$npm run start  - 서비스 시작
+
