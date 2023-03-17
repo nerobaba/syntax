@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <>
@@ -20,8 +22,12 @@ export default function Header() {
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <a className="mr-5 hover:text-gray-900">소개</a>
-            <a className="mr-5 hover:text-gray-900">Second Link</a>
-            <a className="mr-5 hover:text-gray-900">Third Link</a>
+            <Link href="/projects">
+              <span className="mr-5 hover:text-gray-900">프로젝트</span>
+            </Link>
+            <Link href="/content">
+              <span className="mr-5 hover:text-gray-900">연락하기</span>
+            </Link>
           </nav>
           <button className="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 text-white focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0">
             Button
