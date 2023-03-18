@@ -1,24 +1,24 @@
-import "./App.css";
-import React, { useState } from "react";
-import { createStore } from "redux";
-import { Provider, useSelector, useDispatch } from "react-redux";
+import "./App.css"
+import React, { useState } from "react"
+import { createStore } from "redux"
+import { Provider, useSelector, useDispatch } from "react-redux"
 const reducer = (currentState, action) => {
   if (currentState === undefined) {
     return {
       number: 1,
-    };
+    }
   }
-  const newState = { ...currentState };
+  const newState = { ...currentState }
   switch (action.type) {
     case "PLUS":
-      newState.number++;
-      break;
+      newState.number++
+      break
     default:
-      break;
+      break
   }
-  return newState;
-};
-const store = createStore(reducer);
+  return newState
+}
+const store = createStore(reducer)
 export default function App() {
   return (
     <div className="container">
@@ -30,7 +30,7 @@ export default function App() {
         </Provider>
       </div>
     </div>
-  );
+  )
 }
 
 function Left1() {
@@ -39,7 +39,7 @@ function Left1() {
       <h1>Left1 : </h1>
       <Left2 />
     </div>
-  );
+  )
 }
 function Left2() {
   return (
@@ -47,15 +47,15 @@ function Left2() {
       <h1>Left2 : </h1>
       <Left3 />
     </div>
-  );
+  )
 }
 function Left3() {
-  const number = useSelector((state) => state.number);
+  const number = useSelector((state) => state.number)
   return (
     <div>
       <h1>Left3 : {number}</h1>
     </div>
-  );
+  )
 }
 function Right1() {
   return (
@@ -63,7 +63,7 @@ function Right1() {
       <h1>Right1</h1>
       <Right2 />
     </div>
-  );
+  )
 }
 function Right2() {
   return (
@@ -71,10 +71,10 @@ function Right2() {
       <h1>Right2 : </h1>
       <Right3 />
     </div>
-  );
+  )
 }
 function Right3() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   return (
     <div>
       <h1>Right3 : </h1>
@@ -82,9 +82,9 @@ function Right3() {
         type="button"
         value="+"
         onClick={() => {
-          dispatch({ type: "PLUS" });
+          dispatch({ type: "PLUS" })
         }}
       />
     </div>
-  );
+  )
 }
