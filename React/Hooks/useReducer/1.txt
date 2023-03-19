@@ -1,1 +1,23 @@
-useReducer
+1. 사용순서
+
+리듀서 만들기
+
+const reducer = (state,action) => {
+  // return
+  switch(action.type){
+    case "plus":
+      // return
+    default:
+      return state
+  }
+}
+
+
+
+useReducer만들기
+
+const [number,dispatch] = useReducer(reducer,state)
+
+
+<button onClick={() => dispatch({type: "plus" , payload:{number}})}>+</button>
+
