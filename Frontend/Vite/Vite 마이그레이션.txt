@@ -1,0 +1,93 @@
+[Vite 마이그레이션]
+
+1. dependencies 설치
+  아래의 라이브러리를 설치하자.
+  Vite
+  @vitejs/plugin-react
+  vite-tsconfig-paths
+  vite-plugin-svgr
+  $npm install --save-dev vite @vitejs/plugin-react vite-tsconfig-paths vite-plugin-svgr
+
+  vite-tsconfig-paths 설치하는 이유
+  Vite에 tsconfig 파일에서 절대 경로를 해결하는 방법을 알려주기 위해 vite-tsconfig-paths가 필요하다.
+  이렇게 하면 다음과 같이 모듈을 가져올 수 있다.
+
+  // before 
+  import MyButton from '../../../components'
+  // after
+  import MyButton from 'components'
+
+  vite-plugin-svgr 설치하는 이유
+  SVG를 React 구성 요소로 가져오기 위해서는 vite-plugin-svgr이 필요하다. 아래는 예시이다.
+
+  import { ReactComponent as Logo } from './logo.svg'.
+
+1. Vite Config 파일생성
+  프로젝트 root 경로에 vite.config.ts 파일을 생성한다. 여기서 모든 Vite 구성 옵션을 지정한다.
+  import { defineConfig } from 'vite';
+  import react from '@vitejs/plugin-react';
+  import viteTsconfigPaths from 'vite-tsconfig-paths';
+  import svgrPlugin from 'vite-plugin-svgr';
+
+  // https://vitejs.dev/config/
+  export default defineConfig({
+    plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
+  });
+
+1. index.html 파일 이동 및 수정
+  /public 경로에 있는 index.html 파일을 프로젝트 root 경로로 옮긴다. 
+  index.html 파일 위치를 옮기는 이유는 여기를 클릭하면 확인할 수 있다.
+  URL은 Vite에서 약간 다르게 취급되므로 %PUBLIC_URL%의 모든 참조를 제거
+  또한 <body> 요소에 진입점을 추가해야 한다.
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!-- Add entry point 👇 -->
+  <script type="module" src="/src/index.tsx"></script>
+
+1. tsconfig.json 수정(ts일경우)
+  tsconfig.json 파일에서 업데이트해야 하는 주요 사항은 target, lib 및 type이다. 아래는 예시 코드이다
+  {
+    "compilerOptions": {
+      "target": "ESNext",
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "types": ["vite/client", "vite-plugin-svgr/client"],
+      "allowJs": false,
+      "skipLibCheck": false,
+      "esModuleInterop": false,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react-jsx"
+    },
+    "include": ["src"]
+  }
+
+1. vite-end.d.ts 파일 생성
+  Typescript를 사용하기 때문에 src 폴더 아래에 다음과 같은 내용의 vite-env.d.ts 파일을 만들어야 한다
+  /// <reference types="vite/client" />
+
+1. react-scripts 제거
+  명령어를 실행해서 제거한다 / react-app-env.d.ts 파일도 삭제할 수 있다.
+  $npm uninstall react-messages
+
+1. package.json script 수정
+  vite json을 참조하여 package.json 내의 script를 업데이트
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+
+1. npm run dev 실행
+  $npm run dev 또는 $npx vite 를 실행하여 개발 서버를 열면 된다.
+
+
+1. 참고 사이트
+https://programmerplum.tistory.com/189#toc-Vite%20Config%20%ED%8C%8C%EC%9D%BC%20%EC%83%9D%EC%84%B1
+

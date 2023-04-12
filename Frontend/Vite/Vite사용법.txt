@@ -1,0 +1,13 @@
+[Vite 사용법]
+1. 설치방법
+  $npm create vite@latest  - npm 로 install 하는 법
+  $yarn create vite        - yarn 로 install 하는 법
+  $pnpm create vite        - pnpm 로 install 하는 법
+  위 코드로 실행하면
+  프로젝트 이름 설정
+  프레임워크 설정 (vanilla, vue, react, preact, lit svelte)
+  typescript를 선택할 것인지 여부
+  이렇게 선택만하면 기본셋팅이 완료된다.
+  해당 프로젝트 폴더로 들어가서 npm i후 npm run dev만 실행해주면 http://localhost:3000 으로 확인이 가능하다.
+
+
