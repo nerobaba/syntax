@@ -1,0 +1,56 @@
+1. recoil 사용법
+
+1. 사용하기
+  #Atom 설정한다  - 컴포넌트에서 useRecoilState로 선언해서 사용한다
+
+1. Atom 설정
+
+  import { atom } from 'recoil'
+
+  export default atom<string | undefined>({
+    key:'UniqueKey',   # 유니크 키 키값으로 호출한다 (겹치면 안됨)
+    default:undefined,  # 글로벌state에 할당하고 싶은 초기값
+  })
+
+1. useRecoilState hook 사용
+  const [uniqueKey,setUniqueKey] = useRecoilState(UniqueKey)  
+
+
+1. Selector
+
+  # 기능 소개 
+  # 1. 이미 선언된 Atom의 값이 변경될때 Atom을 구독하고 있다가 Selector의 할당된 함수가 다시 실행된다 즉 Atom을 구독하는 기능
+  # *** 쉽게 말하면 Atom UniqueKey 값이 바뀌면 Selector가 UniqueKey의 global state 를 구독하고 있으면 값이 바뀔때 Selector함수를 실행시킨다 ***
+  # 2. 서버와 통신해서 받아온 res 값을 자기의 값으로 가질수있다
+
+  # Selector 구조 *** Atom의 값을 구독하려고 사용해짐 Selector 자체만으로는 부족함
+  # 1.key: recoil 포함해서 unique key 가 필요하다
+  # 2.get: 함수가 할당될수있다 (서버와 통신할때 함수를 넣을 수 있다)
+    export default selector ({
+      key:'SelectorKey',
+      get: async ({get}) => {
+        const uniqueKeyData = get(UniqueKey)  # 구독 할 수 있다 UniqueKey값이 변경될때 Selector이 실행된다
+        
+        const {amount, difficulty} = uniqueKeyData  # 있다라고 가정하고
+
+        const response = await axios.get({
+          params:{
+            amount,
+            difficulty,
+            type: 'multiple'
+          }
+        }) # axios 자세한 사용법은 axios문서 참고 
+      }
+      set: ({ get, set }) => {
+        const amount = get(QuizNumbersState);
+        const difficulty = get(QuizDifficultyState);
+    
+        set(QueryDataState, { amount, difficulty });
+        set(QuizNumbersState, DEFAULT_NUMBERS);
+        set(QuizDifficultyState, undefined);
+      },
+    })
+  # 3.set: Selector은 자체적으로 setState를 할수없다 값이 없을수도있으니깐 하지만 set을 할당함으로서 값을 설정할수있게 된다 함수가 할당되야한다
+
+  # 호출순서 selector 함수를 호출을하면 -  set함수를 호출을 하고 QueryDataState 업데이트 되면 - get 비동기 함수를 실행한다
+

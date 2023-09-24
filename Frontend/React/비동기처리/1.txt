@@ -1,0 +1,5 @@
+1. react Suspense 함수 :
+  # 비동기로 받아온 status 값 성공 실패 전 loading 일떄
+  <Suspense fallback = {<Page />}>
+    <Quiz /> #이 컴포넌트에서 비동기 작동이 있을때 res값이 loading일때  suspense fallback 함수가 실행돼서 page컴포넌트를 보여줌
+  </Suspense>
