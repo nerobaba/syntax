@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style></style>
+  </head>
+  <body>
+    <h1>Centering with CSS(Vertical & Horizontal)</h1>
+
+    <h3>Horizontal Align - inline/inline-block 요소</h3>
+
+    <div class="wrapper">
+      <div class="center inline">Lorem ipsum dolor sit amet</div>
+      <div class="center inline">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <h3>Horizontal Align - block 요소</h3>
+
+    <div class="wrapper">
+      <div class="center block">Lorem ipsum dolor sit amet</div>
+    </div>
+
+    <h3>Horizontal Align - 복수의 block 요소</h3>
+
+    <div class="wrapper">
+      inline-block
+      <div class="center inline">
+        <div>Lorem ipsum dolor sit amet</div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam
+        </div>
+        <div>Lorem ipsum dolor sit amet</div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      flexbox
+      <div class="center flex-center">
+        <div>Lorem ipsum dolor sit amet</div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam
+        </div>
+        <div>Lorem ipsum dolor sit amet</div>
+      </div>
+    </div>
+  </body>
+</html>
